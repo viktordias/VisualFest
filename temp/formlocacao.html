@@ -1,0 +1,66 @@
+<form method='POST' role='form' action='#'>
+    <div class='form-group'>
+        <label for='in_Codlocacao'>Codlocacao</label>
+        <input name='in_Codlocacao' id='in_Codlocacao' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Datainicio'>Datainicio</label>
+        <input name='in_Datainicio' id='in_Datainicio' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Datafinal'>Datafinal</label>
+        <input name='in_Datafinal' id='in_Datafinal' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Datadevolucao'>Datadevolucao</label>
+        <input name='in_Datadevolucao' id='in_Datadevolucao' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Valordia'>Valordia</label>
+        <input name='in_Valordia' id='in_Valordia' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Valorfinal'>Valorfinal</label>
+        <input name='in_Valorfinal' id='in_Valorfinal' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Desconto'>Desconto</label>
+        <input name='in_Desconto' id='in_Desconto' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Multadia'>Multadia</label>
+        <input name='in_Multadia' id='in_Multadia' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Multatotal'>Multatotal</label>
+        <input name='in_Multatotal' id='in_Multatotal' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_ClienteCodcliente'>Cliente Codcliente</label>
+        <input name='in_ClienteCodcliente' id='in_ClienteCodcliente' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Horainicio'>Horainicio</label>
+        <input name='in_Horainicio' id='in_Horainicio' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Horafinal'>Horafinal</label>
+        <input name='in_Horafinal' id='in_Horafinal' class='form-control' type='text' >
+    </div>
+
+
+
+    include("config.php");
+
+    $codlocacao = $_POST['in_Codlocacao'];
+    $datainicio = $_POST['in_Datainicio'];
+    $datafinal = $_POST['in_Datafinal'];
+    $datadevolucao = $_POST['in_Datadevolucao'];
+    $valordia = $_POST['in_Valordia'];
+    $valorfinal = $_POST['in_Valorfinal'];
+    $desconto = $_POST['in_Desconto'];
+    $multadia = $_POST['in_Multadia'];
+    $multatotal = $_POST['in_Multatotal'];
+    $cliente_codcliente = $_POST['in_ClienteCodcliente'];
+    $horainicio = $_POST['in_Horainicio'];
+    $horafinal = $_POST['in_Horafinal'];

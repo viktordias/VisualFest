@@ -1,0 +1,33 @@
+<div class="header">
+    <div>
+        <form action="" method="post">
+            <ol>
+                <p>Cadastros</p>
+                <li><input type="submit" value="Pessoas" name="btnPerson"></li>
+                <li><input type="submit" value="Produtos" name="btnProduct"></li>
+                <li><input type="submit" value="Usuario" name="btnUser"></li>
+            </ol>
+        </div>
+        <div>
+            <ol>
+                <p>Exibir</p>
+                <li>Pessoa</li>
+                <li>Produtos</li>
+                <li>Usuario</li>
+            </ol>
+            <p>locação</p>
+            <p>Reserva</p>
+        </form>
+    </div>
+</div>
+<?php
+if(isset($_POST["btnPerson"])){
+    header("location:PersonRegistration.php");
+}
+if(isset($_POST["btnProduct"])){
+    header("location:ProductRegistration.php");
+}
+if(isset($_POST["btnUser"])){
+    header("location:UserRegistration.php");
+}
+?>

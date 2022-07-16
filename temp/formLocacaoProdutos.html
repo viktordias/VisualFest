@@ -1,0 +1,31 @@
+<form method='POST' role='form' action='#'>
+    <div class='form-group'>
+        <label for='in_LocacaoCodprodutos'>Locacao Codprodutos</label>
+        <input name='in_LocacaoCodprodutos' id='in_LocacaoCodprodutos' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_ProdutosCodprodutos'>Produtos Codprodutos</label>
+        <input name='in_ProdutosCodprodutos' id='in_ProdutosCodprodutos' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Quantidade'>Quantidade</label>
+        <input name='in_Quantidade' id='in_Quantidade' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Valor'>Valor</label>
+        <input name='in_Valor' id='in_Valor' class='form-control' type='text' >
+    </div>
+    <div class='form-group'>
+        <label for='in_Total'>Total</label>
+        <input name='in_Total' id='in_Total' class='form-control' type='text' >
+    </div>
+
+
+
+    include("config.php");
+
+    $locacao_codprodutos = $_POST['in_LocacaoCodprodutos'];
+    $produtos_codprodutos = $_POST['in_ProdutosCodprodutos'];
+    $quantidade = $_POST['in_Quantidade'];
+    $valor = $_POST['in_Valor'];
+    $total = $_POST['in_Total'];
