@@ -1,3 +1,22 @@
+<?php
+    include "../mapper/conexao.php";
+    include "../data/cliente.class.php";
+    include "../mapper/cliente.class.php";
+
+    $ClienteMapper = new clienteMapper();
+
+    $cliente = array("codcliente"=>" " , "nome"=>" ", 
+    "datanascimento" => " " , "logradouro" => " " , " bairro"=> " ",
+    "numero" => " " ,"cep" => " " ,"cpf_cnpj" => " " ,
+    "cidade" => " " ,"estado" => " " ,"observacoes" => " " ,
+    "telefone" => " " ,"complemento" => " " ,
+);
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,7 +40,7 @@
         </div>
         <div class='form-group'>
             <label for='in_Datanascimento'>Datanascimento</label>
-            <input name='in_Datanascimento' id='in_Datanascimento' class='form-control' type='text' >
+            <input name='in_Datanascimento' id='in_Datanascimento' class='form-control' type='date' >
         </div>
         <div class='form-group'>
             <label for='in_Logradouro'>Logradouro</label>
@@ -64,8 +83,24 @@
             <input name='in_Complemento' id='in_Complemento' class='form-control' type='text' >
         </div>
         <input type="submit" value="Cadastrar" name="btnCadastrar">
-        <input type="submit" value="Entrar" name="btnEntrar">
+        <input type="submit" value="Editar" name="btnEditar">
+        <input type="submit" value="Excluir" name="btnExcluir">
     </div>
+
+<?php
+    if(isset($_POST["btnCadastrar"])){
+        $cont = $ClienteMapper->contPerson($conexao);
+        $cliente = new cliente( intval($cont) + 1 ,
+        $_POST["in_Nome"  ] , $_POST['in_Datanascimento'] ,
+        $_POST['in_Logradouro'], $_POST['in_Bairro'],
+        $_POST['in_Numero'] , $_POST['in_Cep'] , 
+        $_POST['in_CpfCnpj'] , $_POST['in_Cidade'] , 
+        $_POST['in_Estado'] , $_POST['in_Observacoes'],
+        $_POST['in_Telefone'] , $_POST['in_Complemento']
+        );
+        $ClienteMapper->insert($cliente,$conexao);
+} 
+?>
     
 </body>
 </html>

@@ -11,9 +11,9 @@
         <div>
             <ol>
                 <p>Exibir</p>
-                <li>Pessoa</li>
-                <li>Produtos</li>
-                <li>Usuario</li>
+                <li><input type="submit" value="Pessoas" name="btnPersonView"></li>
+                <li><input type="submit" value="Produtos" name="btnProductView"></li>
+                <li><input type="submit" value="Usuario" name="btnUserView"></li>
             </ol>
             <p>locação</p>
             <p>Reserva</p>
@@ -29,5 +29,8 @@ if(isset($_POST["btnProduct"])){
 }
 if(isset($_POST["btnUser"])){
     header("location:UserRegistration.php");
+}
+if(isset($_POST["btnPersonView"])){
+    header("location:ViewPerson.php");
 }
 ?>

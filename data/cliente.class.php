@@ -13,10 +13,8 @@
         private $Observacoes;
         private $Telefone;
         private $Complemento;
-    }
 
-
-    public function __construct($CodCliente, $Nome,
+        public function __construct($CodCliente, $Nome,
         $DataNascimento, $Logradouro , $Bairro , $Numero , $CEP , $CPF_CNPJ , $Cidade , $Estado , $Observacoes,
         $Telefone , $Complemento){
         $this->CodCliente = $CodCliente;
@@ -115,3 +113,7 @@
         $this->Complemento = $Complemento;
     }
    
+    }
+
+
+  
