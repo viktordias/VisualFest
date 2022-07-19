@@ -58,20 +58,20 @@ include "../mapper/conexao.php";
                     numero=:numero,cep=:cep,cpf_cnpj=:cpf_cnpj,cidade=:cidade,estado=:estado,
                     observacoes=:observacoes,telefone=:telefone,complemento=:complemento 
                     WHERE codcliente=:codcliente";
-                    $query = $dbConn->prepare($sql);
-                    $query->bindparam(':codcliente', $codcliente);
-                    $query->bindparam(':nome', $nome);
-                    $query->bindparam(':datanascimento', $datanascimento);
-                    $query->bindparam(':logradouro', $logradouro);
-                    $query->bindparam(':bairro', $bairro);
-                    $query->bindparam(':numero', $numero);
-                    $query->bindparam(':cep', $cep);
-                    $query->bindparam(':cpf_cnpj', $cpf_cnpj);
-                    $query->bindparam(':cidade', $cidade);
-                    $query->bindparam(':estado', $estado);
-                    $query->bindparam(':observacoes', $observacoes);
-                    $query->bindparam(':telefone', $telefone);
-                    $query->bindparam(':complemento', $complemento);
+                    $query = $conexao->prepare($sql);
+                    $query->bindValue(':codcliente', $cliente->getCodCliente());
+                    $query->bindValue(':nome', $cliente->getNome());
+                    $query->bindValue(':datanascimento', $cliente->getDataNascimento());
+                    $query->bindValue(':logradouro', $cliente->getLogradouro());
+                    $query->bindValue(':bairro', $cliente->getBairro());
+                    $query->bindValue(':numero', $cliente->getNumero());
+                    $query->bindValue(':cep', $cliente->getCEP());
+                    $query->bindValue(':cpf_cnpj', $cliente->getCPF_CNPJ());
+                    $query->bindValue(':cidade', $cliente->getCidade());
+                    $query->bindValue(':estado', $cliente->getEstado());
+                    $query->bindValue(':observacoes', $cliente->getObservacoes());
+                    $query->bindValue(':telefone', $cliente->getTelefone());
+                    $query->bindValue(':complemento', $cliente->getComplemento());
                     $query->execute();
             } catch (PDOException $e) {
                 //throw $th;
@@ -113,12 +113,29 @@ include "../mapper/conexao.php";
                     echo "<td>".$row['Observacoes']."</td>";
                     echo "<td>".$row['telefone']."</td>";
                     echo "<td>".$row['Complemento']."</td>";
+                    echo "<td><a href='PersonRegistration.php?id={$row['CodCliente']}&op=e'>
+                    Alterar</a></td>";
+                    echo "<td><a href='usuario.php?id={$row['CodCliente']}&op=d'>
+                    Apagar</a></td>";
                     echo "</tr>";
                 }
                 echo "</table>";
             } catch (PDOException $e) {
                 //throw $th;
                 echo "Erro ao exibir o cliente";
+            }
+        }
+
+        public function selectId($id, $conexao){
+            try{
+                $sql = "SELECT * FROM cliente WHERE CodCliente=?";
+                $stmt = $conexao->prepare($sql);
+                $stmt->bindValue(1, $id);
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $resultado;
+            }catch(PDOException $e){
+                return array();
             }
         }
     }

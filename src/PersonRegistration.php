@@ -5,12 +5,19 @@
 
     $ClienteMapper = new clienteMapper();
 
-    $cliente = array("codcliente"=>" " , "nome"=>" ", 
-    "datanascimento" => " " , "logradouro" => " " , " bairro"=> " ",
-    "numero" => " " ,"cep" => " " ,"cpf_cnpj" => " " ,
-    "cidade" => " " ,"estado" => " " ,"observacoes" => " " ,
-    "telefone" => " " ,"complemento" => " " ,
+    $cliente = array("CodCliente"=>" " , "Nome"=>" ", 
+    "DataNascimento" => " " , "Logradouro" => " " , "Bairro"=> " ",
+    "Numero" => " " ,"CEP" => " " ,"CPF_CNPJ" => " " ,
+    "Cidade" => " " ,"Estado" => " " ,"Observacoes" => " " ,
+    "telefone" => " " ,"Complemento" => " " ,
 );
+if (isset($_GET["op"])) {
+    # code...
+    if($_GET["op"]=="e"){
+        $id = $_GET["id"];
+        $cliente = $ClienteMapper->selectId($id , $conexao)[0];
+    }    
+}
 
 ?>
 
@@ -32,74 +39,108 @@
     <form method='POST' role='form' action='#'>
         <div class='form-group'>
             <label for='in_Codcliente'>Codcliente</label>
-            <input name='in_Codcliente' id='in_Codcliente' class='form-control' type='text' >
+            <input name='in_Codcliente' id='in_Codcliente' class='form-control' 
+            type='text' value = "<?php echo $cliente["CodCliente"]; ?>" ><br>
         </div>
         <div class='form-group'>
             <label for='in_Nome'>Nome</label>
-            <input name='in_Nome' id='in_Nome' class='form-control' type='text' >
+            <input name='in_Nome' id='in_Nome' class='form-control' 
+            type='text' value = "<?php echo $cliente["Nome"]; ?>" >
         </div>
         <div class='form-group'>
             <label for='in_Datanascimento'>Datanascimento</label>
-            <input name='in_Datanascimento' id='in_Datanascimento' class='form-control' type='date' >
+            <input name='in_Datanascimento' id='in_Datanascimento' class='form-control' 
+            type='date'  value = "<?php echo $cliente["DataNascimento"]; ?>">
         </div>
         <div class='form-group'>
             <label for='in_Logradouro'>Logradouro</label>
-            <input name='in_Logradouro' id='in_Logradouro' class='form-control' type='text' >
+            <input name='in_Logradouro' id='in_Logradouro' class='form-control' 
+            type='text' value = "<?php echo $cliente["Logradouro"]; ?>">
         </div>
         <div class='form-group'>
             <label for='in_Bairro'>Bairro</label>
-            <input name='in_Bairro' id='in_Bairro' class='form-control' type='text' >
+            <input name='in_Bairro' id='in_Bairro' class='form-control' 
+            type='text' value = "<?php echo $cliente["Bairro"]; ?>" >
         </div>
         <div class='form-group'>
             <label for='in_Numero'>Numero</label>
-            <input name='in_Numero' id='in_Numero' class='form-control' type='text' >
+            <input name='in_Numero' id='in_Numero' class='form-control' 
+            type='text' value = "<?php echo $cliente["Numero"]; ?>">
         </div>
         <div class='form-group'>
             <label for='in_Cep'>Cep</label>
-            <input name='in_Cep' id='in_Cep' class='form-control' type='text' >
+            <input name='in_Cep' id='in_Cep' class='form-control' 
+            type='text' value = "<?php echo $cliente["CEP"]; ?>">
         </div>
         <div class='form-group'>
             <label for='in_CpfCnpj'>Cpf Cnpj</label>
-            <input name='in_CpfCnpj' id='in_CpfCnpj' class='form-control' type='text' >
+            <input name='in_CpfCnpj' id='in_CpfCnpj' class='form-control' 
+            type='text' value = "<?php echo $cliente["CPF_CNPJ"]; ?>">
         </div>
         <div class='form-group'>
             <label for='in_Cidade'>Cidade</label>
-            <input name='in_Cidade' id='in_Cidade' class='form-control' type='text' >
+            <input name='in_Cidade' id='in_Cidade' class='form-control' 
+            type='text' value = "<?php echo $cliente["Cidade"]; ?>">
         </div>
         <div class='form-group'>
             <label for='in_Estado'>Estado</label>
-            <input name='in_Estado' id='in_Estado' class='form-control' type='text' >
+            <input name='in_Estado' id='in_Estado' class='form-control' 
+            type='text' value = "<?php echo $cliente["Estado"]; ?>">
         </div>
         <div class='form-group'>
             <label for='in_Observacoes'>Observacoes</label>
-            <input name='in_Observacoes' id='in_Observacoes' class='form-control' type='text' >
+            <input name='in_Observacoes' id='in_Observacoes' class='form-control' 
+            type='text' value = "<?php echo $cliente["Observacoes"]; ?>">
         </div>
         <div class='form-group'>
             <label for='in_Telefone'>Telefone</label>
-            <input name='in_Telefone' id='in_Telefone' class='form-control' type='text' >
+            <input name='in_Telefone' id='in_Telefone' class='form-control' 
+            type='text' value = "<?php echo $cliente["telefone"]; ?>">
         </div>
         <div class='form-group'>
             <label for='in_Complemento'>Complemento</label>
-            <input name='in_Complemento' id='in_Complemento' class='form-control' type='text' >
+            <input name='in_Complemento' id='in_Complemento' class='form-control' 
+            type='text' value = "<?php echo $cliente["Complemento"]; ?>">
         </div>
-        <input type="submit" value="Cadastrar" name="btnCadastrar">
-        <input type="submit" value="Editar" name="btnEditar">
-        <input type="submit" value="Excluir" name="btnExcluir">
     </div>
 
 <?php
-    if(isset($_POST["btnCadastrar"])){
-        $cont = $ClienteMapper->contPerson($conexao);
-        $cliente = new cliente( intval($cont) + 1 ,
-        $_POST["in_Nome"  ] , $_POST['in_Datanascimento'] ,
-        $_POST['in_Logradouro'], $_POST['in_Bairro'],
-        $_POST['in_Numero'] , $_POST['in_Cep'] , 
-        $_POST['in_CpfCnpj'] , $_POST['in_Cidade'] , 
-        $_POST['in_Estado'] , $_POST['in_Observacoes'],
-        $_POST['in_Telefone'] , $_POST['in_Complemento']
-        );
-        $ClienteMapper->insert($cliente,$conexao);
-} 
+    
+        # code...
+        if(isset($_POST["btnCadastrar"])){
+            $cont = $ClienteMapper->contPerson($conexao);
+            $cliente = new cliente( intval($cont) + 1 ,
+            $_POST["in_Nome"  ] , $_POST['in_Datanascimento'] ,
+            $_POST['in_Logradouro'], $_POST['in_Bairro'],
+            $_POST['in_Numero'] , $_POST['in_Cep'] , 
+            $_POST['in_CpfCnpj'] , $_POST['in_Cidade'] , 
+            $_POST['in_Estado'] , $_POST['in_Observacoes'],
+            $_POST['in_Telefone'] , $_POST['in_Complemento']
+            );
+            $ClienteMapper->insert($cliente,$conexao);    
+        } 
+
+        if(isset($_GET["op"])){
+            include "../helper/BtnEdicao.html" ;
+            if(isset($_POST["btnEditar"])){
+                $cliente = new cliente( $_POST["in_Codcliente"] ,
+                $_POST["in_Nome"  ] , $_POST['in_Datanascimento'] ,
+                $_POST['in_Logradouro'], $_POST['in_Bairro'],
+                $_POST['in_Numero'] , $_POST['in_Cep'] , 
+                $_POST['in_CpfCnpj'] , $_POST['in_Cidade'] , 
+                $_POST['in_Estado'] , $_POST['in_Observacoes'],
+                $_POST['in_Telefone'] , $_POST['in_Complemento']
+                );
+                $ClienteMapper->update($cliente,$conexao);    
+            } 
+
+
+        }else {
+            # code...
+            include "../helper/BtnCadastrar.html" ;
+        }
+    
+   
 ?>
     
 </body>
