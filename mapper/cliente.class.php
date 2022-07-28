@@ -6,7 +6,7 @@ include "../mapper/conexao.php";
         public function contPerson($conexao){
             try {
                 //code...
-                $sql = "select MAX(cli.CodCliente)
+                $sql = "select MAX(cli.CodCliente) + 1 as quant
                 from cliente as cli";
                 $query = $conexao->prepare($sql);
                 $query->execute();
@@ -44,7 +44,9 @@ include "../mapper/conexao.php";
                 $query->execute();
             } catch (PDOException $e) {
                 //throw $th;
-                echo "Erro ao inserir o cliente";
+                echo "Erro ao inserir o cliente\n";
+                echo "$e";
+                echo "$cliente->getCodCliente()";
             }
 
            

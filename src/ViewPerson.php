@@ -24,10 +24,20 @@
     <title>Clientes</title>
 </head>
 <body>
-    <h1>Listas de Clientes</h1>
-    <?php
-        $ClienteMapper->exibir($conexao);
-    ?>
-    
+    <?php include "../helper/header.html" ;?>
+    <div class = 'ViewPerson'>
+        <h1>Listas de Clientes</h1>
+        <?php
+            $ClienteMapper->exibir($conexao);
+        ?>
+    </div>
+    <?php include "../helper/footer.html" ;?>
 </body>
+<style>
+    .ViewPerson{
+        margin: top 300px;
+        padding: 100px;
+        padding-top:150px;
+    }
+</style>
 </html>

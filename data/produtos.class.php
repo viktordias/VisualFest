@@ -8,12 +8,10 @@
         private $Markup;
         private $Aluguel;
         private $Quantidade;
-        private $Imagem;
         private $CodBarras;
-    }
 
-    public function __construct($CodProdutos, $NomeProduto,
-        $Status , $Custo , $Markup , $Aluguel , $Quantidade , $Imagem , $CodBarras){
+        public function __construct($CodProdutos, $NomeProduto,
+        $Status , $Custo , $Markup , $Aluguel , $Quantidade  , $CodBarras){
         $this->CodProdutos = $CodProdutos;
         $this->NomeProduto = $NomeProduto;
         $this->Status = $Status;
@@ -21,7 +19,6 @@
         $this->Markup = $Markup;
         $this->Aluguel = $Aluguel;
         $this->Quantidade = $Quantidade;
-        $this->Imagem = $Imagem;
         $this->CodBarras = $CodBarras;
     }
 
@@ -68,12 +65,6 @@
     public function setQuantidade($Quantidade){
         $this->Quantidade = $Quantidade   ;
     }
-    public function getImagem(){
-        return $this->Imagem;
-    }
-    public function setImagem($Imagem){
-        $this->Imagem = $Imagem   ;
-    }
     public function getCodBarras(){
         return $this->CodBarras;
     }
@@ -83,3 +74,6 @@
 
 
 
+    }
+
+    

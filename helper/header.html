@@ -1,36 +1,109 @@
-<div class="header">
-    <div>
-        <form action="" method="post">
-            <ol>
-                <p>Cadastros</p>
-                <li><input type="submit" value="Pessoas" name="btnPerson"></li>
-                <li><input type="submit" value="Produtos" name="btnProduct"></li>
-                <li><input type="submit" value="Usuario" name="btnUser"></li>
-            </ol>
-        </div>
-        <div>
-            <ol>
-                <p>Exibir</p>
-                <li><input type="submit" value="Pessoas" name="btnPersonView"></li>
-                <li><input type="submit" value="Produtos" name="btnProductView"></li>
-                <li><input type="submit" value="Usuario" name="btnUserView"></li>
-            </ol>
-            <p>locação</p>
-            <p>Reserva</p>
-        </form>
-    </div>
-</div>
-<?php
-if(isset($_POST["btnPerson"])){
-    header("location:PersonRegistration.php");
+<header>
+    <img class="banner" src="../src/image/logo_sistema.png" width="180">
+      <nav>
+        <ul class="menu">
+            <li><a href="pessoas">Pessoas</a>
+                <ul>
+                    <li><a href="../src/PersonRegistration.php">Cadastrar</a></li>
+                    <li><a href="../src/ViewPerson.php">Exibir</a></li>
+                </ul>
+            </li>
+            <li><a href="produtos">Produtos</a>
+                <ul>
+                    <li><a href="../src/ProductRegistration.php">Cadastrar</a></li>
+                    <li><a href="../src/ViewProduct.php">Exibir</a></li>
+                </ul>
+            </li>
+            <li><a href="usuarios">Usuários</a>
+                <ul>
+                    <li><a href="../src/UserRegistration.php">Cadastrar</a></li>
+                    <li><a href="../src/ViewUser.php">Exibir</a></li>
+                </ul>
+            </li>
+            <li><a href="locacao">Locação</a></li>
+            <li><a href="reserva">Reserva</a></li>
+        </ul> 
+    </nav>
+</header>
+
+<style>
+    *{
+    margin: 0;
+    padding: 0;
 }
-if(isset($_POST["btnProduct"])){
-    header("location:ProductRegistration.php");
+
+nav{
+    margin-top: 0em;
 }
-if(isset($_POST["btnUser"])){
-    header("location:UserRegistration.php");
+
+body{
+    font-family: arial, helvetica, sans-serif;
+    font-size: 14px;
+    background-color: #FFFFFF;
 }
-if(isset($_POST["btnPersonView"])){
-    header("location:ViewPerson.php");
+
+.banner{
+    margin-left: 20px;
+    padding-top: 10px;
+  }
+
+header{
+    padding: 5px;
+    background-color: #FFFFFF; 
+    width: 100%;
+	position: fixed;       
 }
-?>
+
+.menu{
+    list-style:none;
+    border:none;
+    text-decoration:none; 
+    float: right; 
+    width: 30%;  
+    display: inline-block;
+}
+
+.menu li{
+    position:relative;
+    float:left;
+    border-right:none; 
+}
+
+.menu li a{
+    color:#122023; 
+    text-decoration:none; 
+    padding:5px 10px; 
+    display:block;
+}
+
+.menu li a:hover{
+    background:#e1ff03;
+    color:#fff;
+    -moz-box-shadow:0 3px 10px 0 #CCC;
+    -webkit-box-shadow:0 3px 10px 0 #ccc;
+    text-shadow:0px 0px 5px #fff;
+} 
+/*menu-dropdown*/
+.menu li  ul{
+    position:absolute;
+    top:25px;
+    left:0;
+    display:none;
+}
+
+.menu li:hover ul, .menu li.over ul{
+    display:block;
+}
+
+.menu li ul li{
+    border:none;
+    display:block;
+    width:auto;
+    list-style:none;
+}
+
+.h1{
+    width:auto;
+    padding: 50;
+}
+</style>

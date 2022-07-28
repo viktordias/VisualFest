@@ -2,22 +2,35 @@
 //CRUD cliente
     class produtosMapper{
 
+        public function contProduct($conexao){
+            try {
+                //code...
+                $sql = "select MAX(pr.CodProduto) + 1 as quant
+                from produtos as pr";
+                $query = $conexao->prepare($sql);
+                $query->execute();
+                $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+                return $resultado;
+            } catch(PDOException $e){
+                return array();
+            }
+        }
+
         public function insert($produtos , $conexao){
             try {
                 //code...
-                $sql = "INSERT INTO undefined (codprodutos,nomeproduto,status,
-                custo,markup,aluguel,quantidade,imagem,codbarras) VALUES (:codprodutos,:nomeproduto,
-                :status,:custo,:markup,:aluguel,:quantidade,:imagem,:codbarras)";
-                $query = $dbConn->prepare($sql);
-                $query->bindparam(':codprodutos', $codprodutos);
-                $query->bindparam(':nomeproduto', $nomeproduto);
-                $query->bindparam(':status', $status);
-                $query->bindparam(':custo', $custo);
-                $query->bindparam(':markup', $markup);
-                $query->bindparam(':aluguel', $aluguel);
-                $query->bindparam(':quantidade', $quantidade);
-                $query->bindparam(':imagem', $imagem);
-                $query->bindparam(':codbarras', $codbarras);
+                $sql = "INSERT INTO produtos (codprodutos,nomeproduto,status,
+                custo,markup,aluguel,quantidade,codbarras) VALUES (:codprodutos,:nomeproduto,
+                :status,:custo,:markup,:aluguel,:quantidade,:codbarras)";
+                $query = $conexao->prepare($sql);
+                $query->bindValue(':codprodutos', $produtos->getCodProdutos());
+                $query->bindValue(':nomeproduto',  $produtos->getNomeProduto());
+                $query->bindValue(':status', $produtos->getStatus());
+                $query->bindValue(':custo', $produtos->getCusto());
+                $query->bindValue(':markup', $produtos->getMarkup());
+                $query->bindValue(':aluguel', $produtos->getAluguel());
+                $query->bindValue(':quantidade', $produtos->getQuantidade());
+                $query->bindValue(':codbarras', $produtos->getCodBarras());
                 $query->execute();
             } catch (PDOException $e) {
                 //throw $th;
@@ -29,19 +42,18 @@
         public function update($produtos , $conexao){
             try {
                 //code...
-                $sql = "UPDATE undefined SET codprodutos=:codprodutos,nomeproduto=:nomeproduto,
+                $sql = "UPDATE produtos SET codprodutos=:codprodutos,nomeproduto=:nomeproduto,
                 status=:status,custo=:custo,markup=:markup,aluguel=:aluguel,quantidade=:quantidade,
-                imagem=:imagem,codbarras=:codbarras WHERE codprodutos=:codprodutos";
-                $query = $dbConn->prepare($sql);
-                $query->bindparam(':codprodutos', $codprodutos);
-                $query->bindparam(':nomeproduto', $nomeproduto);
-                $query->bindparam(':status', $status);
-                $query->bindparam(':custo', $custo);
-                $query->bindparam(':markup', $markup);
-                $query->bindparam(':aluguel', $aluguel);
-                $query->bindparam(':quantidade', $quantidade);
-                $query->bindparam(':imagem', $imagem);
-                $query->bindparam(':codbarras', $codbarras);
+                codbarras=:codbarras WHERE codprodutos=:codprodutos";
+                $query = $conexao->prepare($sql);
+                $query->bindValue(':codprodutos', $produtos->getCodProdutos());
+                $query->bindValue(':nomeproduto',  $produtos->getNomeProduto());
+                $query->bindValue(':status', $produtos->getStatus());
+                $query->bindValue(':custo', $produtos->getCusto());
+                $query->bindValue(':markup', $produtos->getMarkup());
+                $query->bindValue(':aluguel', $produtos->getAluguel());
+                $query->bindValue(':quantidade', $produtos->getQuantidade());
+                $query->bindValue(':codbarras', $produtos->getCodBarras());
                 $query->execute();
             } catch (PDOException $e) {
                 //throw $th;
@@ -64,24 +76,42 @@
         public function exibir($produtos , $conexao){
             try {
                 //code...
-                $result = $dbConn->query("SELECT * FROM undefined ORDER BY id DESC");
+                $result = $conexao->query("SELECT * FROM produtos as pd ORDER BY pd.CodProduto DESC");
+                echo "<table width = '100%' border = '1'>";
                 while($row = $result->fetch(PDO::FETCH_ASSOC)) { 
-                    echo "<YourHTML>";
-                    echo "<YourHTML>".$row['codprodutos']."</YourHTML>";
-                    echo "<YourHTML>".$row['nomeproduto']."</YourHTML>";
-                    echo "<YourHTML>".$row['status']."</YourHTML>";
-                    echo "<YourHTML>".$row['custo']."</YourHTML>";
-                    echo "<YourHTML>".$row['markup']."</YourHTML>";
-                    echo "<YourHTML>".$row['aluguel']."</YourHTML>";
-                    echo "<YourHTML>".$row['quantidade']."</YourHTML>";
-                    echo "<YourHTML>".$row['imagem']."</YourHTML>";
-                    echo "<YourHTML>".$row['codbarras']."</YourHTML>";
-                    echo "<YourHTML>";
+                    echo "<tr>";
+                    echo "<td>".$row['CodProduto']."</td>";
+                    echo "<td>".$row['NomeProduto']."</td>";
+                    echo "<td>".$row['Status']."</td>";
+                    echo "<td>".$row['Custo']."</td>";
+                    echo "<td>".$row['Markup']."</td>";
+                    echo "<td>".$row['Aluguel']."</td>";
+                    echo "<td>".$row['Quantidade']."</td>";
+                    echo "<td>".$row['CodBarras']."</td>";
+                    echo "<td><a href='ProductRegistration.php?id={$row['CodProduto']}&op=e'>
+                    Alterar</a></td>";
+                    echo "<td><a href='ProductRegistration.php?id={$row['CodProduto']}&op=d'>
+                    Apagar</a></td>";
+                    echo "</tr>";
                 }
+                echo "</table>";
             } catch (PDOException $e) {
                 //throw $th;
-                echo "Erro ao atualizar o Produto";
+                echo "Erro ao exibir a lista Produto";
             }
+            }
+
+            public function selectId($id, $conexao){
+                try{
+                    $sql = "SELECT * FROM produtos WHERE CodProduto=?";
+                    $stmt = $conexao->prepare($sql);
+                    $stmt->bindValue(1, $id);
+                    $stmt->execute();
+                    $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $resultado;
+                }catch(PDOException $e){
+                    return array();
+                }
             }
        
      }

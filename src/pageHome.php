@@ -9,5 +9,7 @@
 <body>
     <?php include "../helper/header.html" ;?>
 
+    <?php include "../helper/footer.html" ;?>
+
 </body>
 </html>

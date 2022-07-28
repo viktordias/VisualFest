@@ -20,7 +20,7 @@
         public function update($usuario , $Conexao){
             try {
                 //code...
-                $sql = "UPDATE undefined SET login=:login,password=:password WHERE login=:login";
+                $sql = "UPDATE usuario SET login=:login,password=:password WHERE login=:login";
                 $query = $dbConn->prepare($sql);
                 $query->bindparam(':login', $login);
                 $query->bindparam(':password', $password);
@@ -31,10 +31,10 @@
             }
         }
 
-        public function delete($usuario , $Conexao){
+        public function delete($id , $Conexao){
             try {
                 //code...
-                $sql = "DELETE FROM undefined WHERE login=:login";
+                $sql = "DELETE FROM usuario WHERE login=:id";
                 $query = $dbConn->prepare($sql);
                 $query->execute(array(':id' => $id));
             } catch (PDOException $e) {
@@ -46,29 +46,53 @@
         public function exibir($usuario , $Conexao){
             try {
                 //code...
-                $result = $dbConn->query("SELECT * FROM undefined ORDER BY id DESC");
+                $result = $Conexao->query("SELECT * FROM usuario ORDER BY Login DESC");
+                echo "<table width = '100%' border = '1'>";
                 while($row = $result->fetch(PDO::FETCH_ASSOC)) { 
-                    echo "<YourHTML>";
-                    echo "<YourHTML>".$row['login']."</YourHTML>";
-                    echo "<YourHTML>".$row['password']."</YourHTML>";
-                    echo "<YourHTML>";
+                    echo "<td>";
+                    echo "<td>".$row['Login']."</td>";
+                    echo "<td>".$row['Password']."</td>";
+                    echo "<td><a href='UserRegistration.php?id={$row['Login']}&op=e'>
+                    Alterar</a></td>";
+                    echo "<td><a href='UserRegistration.php?id={$row['Login']}&op=d'>
+                    Apagar</a></td>";
+                    echo "</tr>";
+                    echo "<td>";
                 }
+                echo "</table>";
             } catch (PDOException $e) {
                 //throw $th;
                 echo "Erro ao atualizar o Produto";
             }
         }
 
-        public function login($login , $password , $Conexao){
+        public function selectId($id, $conexao){
+            try{
+                $sql = "SELECT * FROM usuario WHERE login=?";
+                $stmt = $conexao->prepare($sql);
+                $stmt->bindValue(1, $id);
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $resultado;
+            }catch(PDOException $e){
+                return array();
+            }
+        }
+
+        public function login($usuario , $Conexao){
             try {
                 //code...
                $sql = "SELECT * FROM usuario WHERE Login =
-                '$login' AND Password = '$senha'" ;
+                :login && Password = :senha" ;
                 $query = $Conexao->prepare($sql);
+                $query->bindparam(':login', $usuario->getUsuario());
+                $query->bindparam(':senhas', $usuario->getPassword());
                 $query->execute();
+                $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+                return $resultado;
             }catch (PDOException $e) {
                 //throw $th;
-                echo "Erro ao atualizar o Produto";
+                echo "Erro ao fazer login";
             }
         }
     }
