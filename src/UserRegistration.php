@@ -62,7 +62,7 @@
                 # code...
                 include "../helper/BtnEdicao.html" ;
                 if(isset($_POST["btnEditar"])){
-                    $usuarioMapper->delete($id, $conexao);
+                    $usuarioMapper->delete($user, $conexao);
                     header("location:ViewUser.php");
             }
 

@@ -31,12 +31,12 @@
             }
         }
 
-        public function delete($id , $Conexao){
+        public function delete($usuario , $Conexao){
             try {
                 //code...
                 $sql = "DELETE FROM usuario WHERE login=:id";
                 $query = $dbConn->prepare($sql);
-                $query->execute(array(':id' => $id));
+                $query->execute(array(':id' => $usuario->getUsuario()));
             } catch (PDOException $e) {
                 //throw $th;
                 echo "Erro ao atualizar o Produto";
